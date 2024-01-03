@@ -1,2 +1,3 @@
 venv-textanalytics2/
 *.json
+trained_gpt2_model
