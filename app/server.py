@@ -1,3 +1,4 @@
+# uvicorn app.server:app --reload
 from fastapi import FastAPI
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 
@@ -19,9 +20,9 @@ async def generate_text(request: dict):
     input_ids = tokenizer.encode(prompt, return_tensors='pt')
     output = model.generate(input_ids,
                             pad_token_id=tokenizer.eos_token_id,
-                            max_length=250,
+                            max_length=150, min_length = 100,
                             temperature=0.6,
+                            no_repeat_ngram_size=3, 
                             do_sample=True)
-    #generated_text = tokenizer.decode(output[0], skip_special_tokens=True)
     generated_text = tokenizer.batch_decode(output[:, input_ids.shape[1]:])[0]
     return {"generated_text": generated_text}

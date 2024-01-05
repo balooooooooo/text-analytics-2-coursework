@@ -1,3 +1,4 @@
+# streamlit run app/app.py
 import streamlit as st
 import requests
 st.set_page_config(layout="wide")
@@ -29,8 +30,8 @@ if st.button('Generate review'):
     # Generate the review prompt and review text
     review_prompt = f"""
 You have a Restaurant with the following Metadata:
-Stars for the review = {stars_reviews}, Stars for the business: {stars_business}, Usefulness = {useful}, Funny: {funny}, Cool: {cool};
-Generate a review. The single review can have as many sentencs as you like, but must end clearly."""
+Stars for the review = {stars_reviews}, Usefulness = {useful}, Funny: {funny}, Cool: {cool};
+Generate a review."""
     
     # Api call
     server_url = "http://127.0.0.1:8000/generate_text"  # Replace with your FastAPI server URL
