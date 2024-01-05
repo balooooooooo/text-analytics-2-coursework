@@ -17,6 +17,11 @@ async def generate_text(request: dict):
         return {"generated_text": "Prompt field is missing"}
     # Tokenize the prompt and generate text
     input_ids = tokenizer.encode(prompt, return_tensors='pt')
-    output = model.generate(input_ids, max_length=100, num_return_sequences=1, temperature=0.7)
+    output = model.generate(input_ids,
+                            pad_token_id=tokenizer.eos_token_id,
+                            max_length=300,
+                            num_return_sequences=1,
+                            temperature=0.7,
+                            do_sample=True)
     generated_text = tokenizer.decode(output[0], skip_special_tokens=True)
     return {"generated_text": generated_text}
