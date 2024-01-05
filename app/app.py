@@ -1,4 +1,5 @@
 import streamlit as st
+import requests
 st.set_page_config(layout="wide")
 
 # Title and instructions
@@ -30,12 +31,25 @@ if st.button('Generate review'):
 You have a Restaurant with the following Metadata:
 Stars for the review = {stars_reviews}, Stars for the business: {stars_business}, Usefulness = {useful}, Funny: {funny}, Cool: {cool};
 Generate a review and return only the review."""
-    # TODO: Api call
-    review_text = "Response."
+    
+    # Api call
+    server_url = "http://127.0.0.1:8000/generate_text"  # Replace with your FastAPI server URL
+    data = {"prompt": review_prompt}
+    try:
+        response = requests.post(server_url, json=data)
+
+        if response.status_code == 200:
+            # Get the generated text from the response
+            print(response.json())
+            generated_text = response.json().get("generated_text")
+        else:
+            st.error("Failed to generate text. Please try again.")
+    except requests.RequestException as e:
+        st.error(f"An error occurred: {e}")
 
     # Output the generated review prompt and review text
     st.subheader('Prompt')
     st.text(review_prompt)
 
     st.subheader('Generated review')
-    st.text(review_text)
+    st.text(generated_text)
