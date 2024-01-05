@@ -30,7 +30,7 @@ if st.button('Generate review'):
     review_prompt = f"""
 You have a Restaurant with the following Metadata:
 Stars for the review = {stars_reviews}, Stars for the business: {stars_business}, Usefulness = {useful}, Funny: {funny}, Cool: {cool};
-Generate a review and return only the review."""
+Generate a review. The single review can have as many sentencs as you like, but must end clearly."""
     
     # Api call
     server_url = "http://127.0.0.1:8000/generate_text"  # Replace with your FastAPI server URL
@@ -39,8 +39,6 @@ Generate a review and return only the review."""
         response = requests.post(server_url, json=data)
 
         if response.status_code == 200:
-            # Get the generated text from the response
-            print(response.json())
             generated_text = response.json().get("generated_text")
         else:
             st.error("Failed to generate text. Please try again.")
