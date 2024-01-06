@@ -11,7 +11,7 @@ tokenizer = GPT2Tokenizer.from_pretrained(model_path, local_files_only=True)
 model = GPT2LMHeadModel.from_pretrained(model_path, local_files_only=True)
 
 # API call
-@app.post("/generate_text")
+@app.post("/generate_review")
 async def generate_text(request: dict):
     prompt = request.get("prompt")
     if prompt == None:
@@ -20,8 +20,8 @@ async def generate_text(request: dict):
     input_ids = tokenizer.encode(prompt, return_tensors='pt')
     output = model.generate(input_ids,
                             pad_token_id=tokenizer.eos_token_id,
-                            max_length=150, min_length = 100,
-                            temperature=0.6,
+                            min_length = 50, max_length=request.get("max_len"),
+                            temperature=request.get("temp"),
                             no_repeat_ngram_size=3, 
                             do_sample=True)
     generated_text = tokenizer.batch_decode(output[:, input_ids.shape[1]:])[0]
