@@ -32,6 +32,5 @@ async def generate_text(request: dict):
 async def read_root():
     import os
     return {
-        "files": os.listdir("./app/trained_gpt2_model"),
         "message": "This is the homepage, duh."
         }
