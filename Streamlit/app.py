@@ -61,7 +61,7 @@ with tab1:
         # Generate the prompt
         review_prompt = f"""
     You have a Restaurant with the following Metadata:
-    Stars for the review = {stars_reviews}, Usefulness = {useful}, Funny: {funny}, Cool: {cool};
+    Stars for the review = {stars_reviews}, Usefulness = {round(useful, 2)}, Funny: {round(funny, 2)}, Cool: {round(cool, 2)};
     Generate a review."""
         
         # Get an answer
