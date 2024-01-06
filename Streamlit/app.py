@@ -34,7 +34,7 @@ Stars for the review = {stars_reviews}, Usefulness = {useful}, Funny: {funny}, C
 Generate a review."""
     
     # Api call
-    server_url = "http://127.0.0.1:8000/generate_text"  # Replace with your FastAPI server URL
+    server_url = "http://fastapi.docker:8000/generate_text"  # Replace with your FastAPI server URL
     data = {"prompt": review_prompt}
     try:
         response = requests.post(server_url, json=data)
