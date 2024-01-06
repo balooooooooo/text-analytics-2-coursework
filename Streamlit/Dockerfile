@@ -2,7 +2,7 @@ FROM python:3.9-slim
 
 # Set WD
 WORKDIR /app
-COPY app/app.py ./app.py
+COPY app.py ./app.py
 
 # Install apps
 RUN pip install streamlit 

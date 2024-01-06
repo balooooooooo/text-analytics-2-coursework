@@ -8,10 +8,10 @@ WORKDIR /app
 RUN pip install fastapi uvicorn transformers
 
 # Copy files to the container
-COPY app/server.py ./server.py
-COPY trained_gpt2_model ./trained_gpt2_model
+COPY ./FastAPI/server.py ./app/server.py
+COPY ./trained_gpt2_model/ ./app/trained_gpt2_model/
 
 # Expose the port for FastAPI
 EXPOSE 8000
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000" , "--reload"]
+CMD ["uvicorn", "app.server:app", "--host", "0.0.0.0", "--port", "8000" , "--reload"]
