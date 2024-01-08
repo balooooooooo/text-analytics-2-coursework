@@ -41,7 +41,7 @@ col1, col2 = st.columns(2)
 with col1:
     max_len = st.number_input('Maximum length',   value=120, min_value=50, max_value=200, step=1)
 with col2:
-    temp = st.number_input('Temperature', value=.6, min_value=0.0, step=.1)
+    temp = st.number_input('Temperature', value=1, min_value=0.0, step=.1)
 
 
 tab1, tab2 = st.tabs(["Prepared prompt", "Custom prompt"])
@@ -53,11 +53,11 @@ with tab1:
     with col1:
         stars_reviews = st.number_input('Stars from reviews', value=1, min_value=1, max_value=5, step=1)
     with col2:
-        useful = st.number_input('Useful (%)', value=.2, min_value=0.0, max_value=1.0, step=.1)
+        useful = st.number_input('Useful (%)', value=.1, min_value=0.0, max_value=1.0, step=.1)
     with col3:
-        funny = st.number_input('Funny (%)',   value=.2, min_value=0.0, max_value=1.0, step=.1)
+        funny = st.number_input('Funny (%)',   value=.1, min_value=0.0, max_value=1.0, step=.1)
     with col4:
-        cool = st.number_input('Cool (%)',     value=.2, min_value=0.0, max_value=1.0, step=.1)
+        cool = st.number_input('Cool (%)',     value=.1, min_value=0.0, max_value=1.0, step=.1)
 
     # Ask LLM
     if st.button('Generate review'):
