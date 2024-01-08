@@ -1,10 +1,11 @@
+# Image to use
 FROM python:3.9-slim
 
 # Set WD
 WORKDIR /app
 COPY app.py ./app.py
 
-# Install apps
+# Install packages
 RUN pip install streamlit 
 
 # Expose port
