@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 
 # API initialization
@@ -13,8 +14,7 @@ model = GPT2LMHeadModel.from_pretrained(model_path, local_files_only=True)
 # Accpets only a dictionary, which should always contain prompt, max_len and temp
 @app.post("/generate_review")
 async def generate_text(request: dict):
-    # Get prompt. If there is no prompt, exit early
-    # Possible checks that prompt/max_len/temp exists, but not implemented since only we will use it
+    # We do not check the validity of prompt/max_len/temp since only we use the API. In production, we would.
     prompt = request.get("prompt")
     # Tokenization and generation
     input_ids = tokenizer.encode(prompt, return_tensors='pt') # Encode prompt
@@ -28,3 +28,19 @@ async def generate_text(request: dict):
     # Decode and return
     generated_text = tokenizer.batch_decode(output[:, input_ids.shape[1]:])[0] # Decode generated text
     return {"generated_text": generated_text}
+
+# Get request
+@app.get("/generate_review", response_class=HTMLResponse)
+async def home():
+    return """
+    <html>
+        <head>
+            <title>Someone cooked here...</title>
+        </head>
+        <body>
+            <h1>Hello!</h1>
+            <p>Hello, you just sent a GET request on this endpoint. However, you should only send POST requests :)</p>
+        </body>
+    </html>
+"""
+   

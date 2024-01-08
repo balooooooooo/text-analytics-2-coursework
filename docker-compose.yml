@@ -6,6 +6,10 @@ services:
     build: ./Streamlit
     ports:
       - 8501:8501
+    networks: 
+      AIservice: 
+        aliases: 
+          - streamlit.docker
     depends_on:
       - backend
   # Backend - FastAPI and uvicorn
@@ -19,7 +23,7 @@ services:
       AIservice: 
         aliases: 
           - fastapi.docker
-
+# Prepare network between dockers
 networks:
   AIservice:
     driver: bridge

@@ -44,7 +44,7 @@ col1, col2 = st.columns(2)
 with col1:
     max_len = st.number_input('Maximum length',   value=120, min_value=50, max_value=200, step=1)
 with col2:
-    temp = st.number_input('Temperature', value=1, min_value=0.0, step=.1)
+    temp = st.number_input('Temperature', value=1.0, min_value=0.0, step=.1)
 
 tab1, tab2 = st.tabs(["Prepared prompt", "Custom prompt"])
 
