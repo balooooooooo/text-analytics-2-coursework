@@ -9,7 +9,7 @@ RUN pip install fastapi uvicorn transformers
 
 # Copy files to the container
 COPY ./FastAPI/server.py ./app/server.py
-COPY ./trained_gpt2_model/ ./app/trained_gpt2_model/
+COPY ./trained_gpt2_model_large/ ./app/trained_gpt2_model_large/
 
 # Expose the port for FastAPI
 EXPOSE 8000

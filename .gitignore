@@ -1,4 +1,4 @@
 venv-textanalytics2/
 *.json
-trained_gpt2_model
+trained_gpt2_model*
 __pycache__

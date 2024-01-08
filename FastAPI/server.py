@@ -6,7 +6,7 @@ from transformers import GPT2LMHeadModel, GPT2Tokenizer
 app = FastAPI()
 
 # Load your pre-trained GPT-2 model and tokenizer
-model_path = "./app/trained_gpt2_model"
+model_path = "./app/trained_gpt2_model_large"
 tokenizer = GPT2Tokenizer.from_pretrained(model_path, local_files_only=True)
 model = GPT2LMHeadModel.from_pretrained(model_path, local_files_only=True)
 

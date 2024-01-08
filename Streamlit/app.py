@@ -4,6 +4,9 @@ import re
 import requests
 st.set_page_config(layout="wide")
 
+def fn(num):
+    return f"{round(num*100)} %"
+
 def ask_llm(prompt: str, max_len: float, temp: float):
     data = {
         "prompt": prompt,
@@ -50,19 +53,16 @@ with tab1:
     with col1:
         stars_reviews = st.number_input('Stars from reviews', value=1, min_value=1, max_value=5, step=1)
     with col2:
-        useful = st.number_input('Useful', value=.5, min_value=0.0, max_value=1.0, step=.1)
+        useful = st.number_input('Useful', value=.2, min_value=0.0, max_value=1.0, step=.1)
     with col3:
-        funny = st.number_input('Funny',   value=.5, min_value=0.0, max_value=1.0, step=.1)
+        funny = st.number_input('Funny',   value=.2, min_value=0.0, max_value=1.0, step=.1)
     with col4:
-        cool = st.number_input('Cool',     value=.5, min_value=0.0, max_value=1.0, step=.1)
+        cool = st.number_input('Cool',     value=.2, min_value=0.0, max_value=1.0, step=.1)
 
     # Ask LLM
     if st.button('Generate review'):
         # Generate the prompt
-        review_prompt = f"""
-    You have a Restaurant with the following Metadata:
-    Stars for the review = {stars_reviews}, Usefulness = {round(useful, 2)}, Funny: {round(funny, 2)}, Cool: {round(cool, 2)};
-    Generate a review."""
+        review_prompt = f"Generate a review that has {stars_reviews} stars, Usefulness = {fn(useful)}, Funny =  {fn(funny)}, and cool = {fn(cool)}"
         
         # Get an answer
         generated_text = ask_llm(prompt=review_prompt, max_len=max_len, temp=temp)
